@@ -1,4 +1,4 @@
-# An app for geek news
+# An app for hacker news
 
 - Developed in SwiftUI
 - Using lists, Navigation, and UIKit in SwiftUI
