@@ -21,17 +21,21 @@ class NetworkManager: ObservableObject {
                     return
                 }
                 if let safeData = data {
-                    let decoder = JSONDecoder()
-                    do{
-                        let decodedData = try decoder.decode(NewsResult.self, from: safeData)
-                        DispatchQueue.main.async {
-                            self.posts = decodedData.hits
-                        }
-                    } catch {
-                        print(error)
-                    }
+                    self.parseData(data: safeData)
                 }
             }.resume()
+        }
+    }
+
+    func parseData(data: Data){
+        let decoder = JSONDecoder()
+        do{
+            let decodedData = try decoder.decode(NewsResult.self, from: data)
+            DispatchQueue.main.async {
+                self.posts = decodedData.hits
+            }
+        } catch {
+            print(error)
         }
     }
 }
