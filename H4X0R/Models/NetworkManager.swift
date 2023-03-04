@@ -12,7 +12,13 @@ class NetworkManager: ObservableObject {
     @Published var posts = [Post]()
 
     func fetchData() {
-        if let url = URL(string: "https://hn.algolia.com/api/v1/search?tags=front_page"){
+        let page = "https://hn.algolia.com/"
+        let endpoint = "api/v1/"
+        let queries = "search?tags=front_page"
+
+        let urlString = page + endpoint + queries
+
+        if let url = URL(string: urlString){
             let urlSession = URLSession(configuration: .default)
 
             urlSession.dataTask(with: url) { data, response, error in
